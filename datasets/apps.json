@@ -4,20 +4,23 @@
     "name": "Animal Quiz",
     "emoji": "\ud83d\udc36",
     "description": "Guess cute animals",
+    "category": "Kids Quiz",
     "url": "/apps/animal-quiz/"
   },
   {
     "id": "fruit-quiz",
     "name": "Fruit Quiz",
     "emoji": "\ud83c\udf4e",
-    "description": "Learn fruits with fun",
+    "description": "Learn fruits fast",
+    "category": "Learning",
     "url": "/apps/fruit-quiz/"
   },
   {
-    "id": "alphabet-kids",
-    "name": "Alphabet Kids",
-    "emoji": "\ud83d\udd24",
-    "description": "Learn ABC with fun",
-    "url": "/apps/alphabet-kids/"
+    "id": "memory-game",
+    "name": "Memory Game",
+    "emoji": "\ud83e\udde0",
+    "description": "Boost memory power",
+    "category": "Brain Game",
+    "url": "/apps/memory-game/"
   }
 ]

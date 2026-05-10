@@ -1,61 +1,90 @@
-async function loadApps() {
-  const response = await fetch('./datasets/apps.json');
-  const apps = await response.json();
+async function loadApps(){
 
-  const container = document.getElementById('appFeed');
+const response = await fetch('./datasets/apps.json');
+const apps = await response.json();
 
-  apps.forEach(app => {
-    const card = document.createElement('div');
-    card.className = 'app-card';
+document.getElementById('appCount').innerText = apps.length;
 
-    card.innerHTML = `
-      <div>
-        <div class="app-emoji">${app.emoji}</div>
-        <h2>${app.name}</h2>
-        <p>${app.description}</p>
-      </div>
+const feed = document.getElementById('feed');
 
-      <button class="play-btn" onclick="openApp('${app.url}')">
-        ▶ PLAY NOW
-      </button>
-    `;
+apps.forEach(app=>{
 
-    container.appendChild(card);
-  });
+const card = document.createElement('div');
+
+card.className = 'card';
+
+card.innerHTML = `
+<div>
+<div class="emoji">${app.emoji}</div>
+
+<h2>${app.name}</h2>
+
+<p>${app.description}</p>
+
+<div class="tag">${app.category}</div>
+</div>
+
+<div>
+<button class="play-btn" onclick="playApp('${app.url}')">
+▶ PLAY NOW
+</button>
+</div>
+`;
+
+feed.appendChild(card);
+
+});
+
 }
 
-function openApp(url){
-  localStorage.setItem('lastPlayed', url);
-  window.location.href = url;
+function playApp(url){
+
+let coins = parseInt(localStorage.getItem('coins') || 0);
+
+coins += 2;
+
+localStorage.setItem('coins', coins);
+
+window.location.href = url;
+
 }
 
-function initCoins(){
-  const coins = localStorage.getItem('coins') || 0;
-  document.getElementById('coinCount').innerText = coins;
+function init(){
+
+const coins = localStorage.getItem('coins') || 0;
+
+document.getElementById('coins').innerText = coins;
+
+const achievements =
+localStorage.getItem('achievements') || 0;
+
+document.getElementById('achievements').innerText =
+achievements;
+
 }
 
-function initLevel(){
-  const level = localStorage.getItem('level') || 1;
-  document.getElementById('levelCount').innerText = level;
-}
+function dailyReward(){
 
-function claimDailyReward(){
-  let coins = parseInt(localStorage.getItem('coins') || 0);
-  coins += 20;
+let coins = parseInt(localStorage.getItem('coins') || 0);
 
-  localStorage.setItem('coins', coins);
+coins += 20;
 
-  document.getElementById('coinCount').innerText = coins;
+localStorage.setItem('coins', coins);
 
-  document.getElementById('rewardModal').classList.remove('hidden');
+document.getElementById('coins').innerText = coins;
+
+document.getElementById('rewardModal').classList.remove('hidden');
+
 }
 
 function closeReward(){
-  document.getElementById('rewardModal').classList.add('hidden');
+
+document.getElementById('rewardModal').classList.add('hidden');
+
 }
 
-document.getElementById('dailyRewardBtn').onclick = claimDailyReward;
+document.getElementById('rewardBtn').onclick = dailyReward;
 
 loadApps();
-initCoins();
-initLevel();
+
+init();

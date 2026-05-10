@@ -1,28 +1,40 @@
 let engine;
 
 async function start(){
-const response = await fetch('./dataset.json');
-const dataset = await response.json();
 
-engine = new MiniAppEngine(dataset);
+const response =
+await fetch('./dataset.json');
+
+const dataset =
+await response.json();
+
+engine =
+new MiniAppEngine(dataset);
 
 render();
+
 }
 
 function render(){
 
-const q = engine.getQuestion();
+const q =
+engine.getQuestion();
 
-document.getElementById('emoji').innerText = q.emoji;
-document.getElementById('question').innerText = q.question;
+document.getElementById('emoji').innerText =
+q.emoji;
 
-const answers = document.getElementById('answers');
+document.getElementById('question').innerText =
+q.question;
+
+const answers =
+document.getElementById('answers');
 
 answers.innerHTML = '';
 
 q.answers.forEach(answer=>{
 
-const btn = document.createElement('button');
+const btn =
+document.createElement('button');
 
 btn.innerText = answer;
 
@@ -36,24 +48,25 @@ answers.appendChild(btn);
 
 function check(answer){
 
-const q = engine.getQuestion();
+const q =
+engine.getQuestion();
 
 if(answer === q.correct){
 
-engine.addScore();
+engine.correct();
 
 document.getElementById('score').innerText =
 engine.score;
 
-alert('🎉 Correct! +5 coins');
+alert('🎉 Correct! +5 Coins');
 
 }else{
 
-alert('❌ Try again');
+alert('❌ Wrong Answer');
 
 }
 
-engine.nextQuestion();
+engine.next();
 
 render();
 

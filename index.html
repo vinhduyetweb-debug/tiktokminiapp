@@ -1,48 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>TikTok Mini App Platform V1</title>
-<link rel="stylesheet" href="style.css" />
-<link rel="manifest" href="manifest.json" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TikTok Mini App Platform V2</title>
+<link rel="stylesheet" href="style.css">
 <script defer src="app.js"></script>
 </head>
 <body>
 
 <header class="topbar">
-  <h1>🎮 Mini App Hub</h1>
+  <h1>🎮 Mini App Platform V2</h1>
 
   <div class="top-actions">
-    <button id="dailyRewardBtn">🎁</button>
-    <button id="soundToggle">🔊</button>
-    <a href="/admin/index.html" class="admin-btn">➕ Add App</a>
+    <button id="rewardBtn">🎁</button>
+    <a href="/admin/index.html">➕ Add App</a>
   </div>
 </header>
 
 <section class="hero">
-  <h2>🔥 Viral Mini Apps</h2>
-  <p>Swipe • Play • Learn • Earn Coins</p>
+  <h2>🔥 Swipe & Play</h2>
+  <p>TikTok-style mini app ecosystem</p>
 </section>
 
-<section class="stats">
-  <div class="stat-box">
+<section class="dashboard">
+  <div class="box">
     <span>🪙 Coins</span>
-    <strong id="coinCount">0</strong>
+    <strong id="coins">0</strong>
   </div>
 
-  <div class="stat-box">
-    <span>🏆 Level</span>
-    <strong id="levelCount">1</strong>
+  <div class="box">
+    <span>🏆 Achievements</span>
+    <strong id="achievements">0</strong>
+  </div>
+
+  <div class="box">
+    <span>🎮 Apps</span>
+    <strong id="appCount">0</strong>
   </div>
 </section>
 
-<main id="appFeed"></main>
+<main id="feed"></main>
 
-<div id="rewardModal" class="reward-modal hidden">
-  <div class="reward-content">
+<div id="rewardModal" class="modal hidden">
+  <div class="modal-content">
     <h2>🎉 Daily Reward</h2>
-    <p>You received +20 coins!</p>
+    <p>+20 Coins Added</p>
     <button onclick="closeReward()">Awesome!</button>
   </div>
 </div>
