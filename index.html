@@ -3,66 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>TikTok Mini App Platform V4</title>
-<link rel="manifest" href="manifest.json">
+<title>MINI APP PLATFORM</title>
 <link rel="stylesheet" href="style.css">
 <script defer src="app.js"></script>
 </head>
 <body>
 
 <header class="topbar">
-  <div>
-    <h1>🎮 TikTok Mini App Platform V4</h1>
-    <p>AI Mini App Ecosystem</p>
-  </div>
+<div>
+<h1>🎮 MINI APP PLATFORM</h1>
+<p>Interactive Mobile Mini App Ecosystem</p>
+</div>
 
-  <div class="top-actions">
-    <button id="rewardBtn">🎁</button>
-    <button id="missionBtn">🎯</button>
-    <a href="/admin/index.html">⚙️</a>
-  </div>
+<div class="top-buttons">
+<button id="rewardBtn">🎁 Reward</button>
+<a href="/admin/index.html">⚙ Admin</a>
+</div>
 </header>
 
-<section class="profile-bar">
-  <div class="profile-card">
-    <span>🪙 Coins</span>
-    <strong id="coins">0</strong>
-  </div>
-
-  <div class="profile-card">
-    <span>🔥 Streak</span>
-    <strong id="streak">1</strong>
-  </div>
-
-  <div class="profile-card">
-    <span>🏆 XP</span>
-    <strong id="xp">0</strong>
-  </div>
-
-  <div class="profile-card">
-    <span>🎮 Apps</span>
-    <strong id="appCount">0</strong>
-  </div>
-</section>
-
 <section class="hero">
-  <h2>Swipe • Play • Earn • Unlock</h2>
-  <p>Infinite TikTok-style mini app experience</p>
+<h2>🔥 Explore Trending Mini Apps</h2>
+<p>Swipe • Play • Learn • Explore</p>
 </section>
 
-<section class="daily-mission">
-  <h3>🎯 Daily Mission</h3>
-  <p>Play 3 mini apps today to earn +50 coins</p>
+<section class="stats">
+<div class="stat">
+<span>🪙 Coins</span>
+<strong id="coins">0</strong>
+</div>
+
+<div class="stat">
+<span>🔥 Apps</span>
+<strong id="appCount">0</strong>
+</div>
+
+<div class="stat">
+<span>🏆 XP</span>
+<strong id="xp">0</strong>
+</div>
 </section>
 
-<main id="feed"></main>
+<main id="appFeed"></main>
 
 <div id="rewardModal" class="modal hidden">
-  <div class="modal-box">
-    <h2>🎉 Daily Reward</h2>
-    <p>You received +20 coins!</p>
-    <button onclick="closeReward()">Awesome</button>
-  </div>
+<div class="modal-box">
+<h2>🎉 Daily Reward</h2>
+<p>You earned +20 coins!</p>
+<button onclick="closeReward()">Awesome</button>
+</div>
 </div>
 
 </body>

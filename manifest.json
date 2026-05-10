@@ -1,8 +1,8 @@
 {
-  "name": "TikTok Mini App Platform V4",
+  "name": "MINI APP PLATFORM",
   "short_name": "MiniApps",
-  "start_url": "/",
   "display": "standalone",
+  "start_url": "/",
   "background_color": "#020617",
   "theme_color": "#020617"
 }

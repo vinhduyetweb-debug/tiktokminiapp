@@ -1,5 +1,10 @@
 
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
 font-family:Arial,sans-serif;
 background:#020617;
@@ -12,20 +17,20 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:18px;
+background:rgba(0,0,0,.8);
 position:sticky;
 top:0;
-background:rgba(0,0,0,.8);
-backdrop-filter:blur(12px);
 z-index:999;
+backdrop-filter:blur(12px);
 }
 
-.top-actions{
+.top-buttons{
 display:flex;
 gap:10px;
 }
 
-.top-actions button,
-.top-actions a{
+.top-buttons a,
+.top-buttons button{
 padding:12px 16px;
 border:none;
 border-radius:999px;
@@ -35,22 +40,8 @@ text-decoration:none;
 cursor:pointer;
 }
 
-.profile-bar{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-padding:16px;
-}
-
-.profile-card{
-background:#111827;
-padding:18px;
-border-radius:20px;
-text-align:center;
-}
-
 .hero{
-padding:20px;
+padding:24px;
 text-align:center;
 }
 
@@ -59,14 +50,21 @@ font-size:34px;
 margin-bottom:10px;
 }
 
-.daily-mission{
-margin:16px;
-padding:18px;
-background:linear-gradient(135deg,#1d4ed8,#2563eb);
-border-radius:24px;
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+padding:0 16px 20px;
 }
 
-#feed{
+.stat{
+background:#111827;
+padding:18px;
+border-radius:20px;
+text-align:center;
+}
+
+#appFeed{
 display:flex;
 flex-direction:column;
 gap:24px;
@@ -74,63 +72,51 @@ padding:20px;
 }
 
 .card{
-min-height:85vh;
 background:linear-gradient(135deg,#1e293b,#334155);
-border-radius:32px;
+border-radius:28px;
 padding:28px;
+min-height:300px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 box-shadow:0 10px 30px rgba(0,0,0,.35);
+transition:.3s ease;
+}
+
+.card:hover{
+transform:translateY(-4px) scale(1.01);
 }
 
 .emoji{
-font-size:90px;
+font-size:82px;
 margin-bottom:10px;
 }
 
 .tag{
 display:inline-block;
-margin-top:12px;
 padding:8px 14px;
 background:#0f172a;
 border-radius:999px;
 font-size:12px;
+margin-top:12px;
 }
 
-.card-actions{
+.actions{
 display:flex;
 gap:10px;
 margin-top:20px;
 }
 
-.play-btn,
-.unlock-btn{
+.play-btn{
 flex:1;
-padding:18px;
+padding:16px;
 border:none;
 border-radius:999px;
 font-size:16px;
 font-weight:bold;
 cursor:pointer;
-}
-
-.play-btn{
 background:#22c55e;
 color:white;
-}
-
-.unlock-btn{
-background:#f59e0b;
-color:black;
-}
-
-.recommend{
-margin-top:20px;
-padding:16px;
-background:#0f172a;
-border-radius:18px;
-font-size:14px;
 }
 
 .modal{
@@ -153,12 +139,14 @@ text-align:center;
 
 .modal-box button{
 margin-top:20px;
-padding:16px;
 width:100%;
+padding:16px;
 border:none;
 border-radius:999px;
 background:#22c55e;
 color:white;
 }
 
-.hidden{display:none;}
+.hidden{
+display:none;
+}
