@@ -1,3 +1,4 @@
+
 *{
 margin:0;
 padding:0;
@@ -12,25 +13,25 @@ overflow-x:hidden;
 }
 
 .topbar{
-position:sticky;
-top:0;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:16px;
+padding:18px;
 background:rgba(0,0,0,.8);
-backdrop-filter:blur(12px);
+position:sticky;
+top:0;
 z-index:999;
+backdrop-filter:blur(12px);
 }
 
-.top-actions{
+.top-buttons{
 display:flex;
 gap:10px;
 }
 
-.top-actions a,
-.top-actions button{
-padding:10px 14px;
+.top-buttons a,
+.top-buttons button{
+padding:12px 16px;
 border:none;
 border-radius:999px;
 background:#2563eb;
@@ -40,7 +41,7 @@ cursor:pointer;
 }
 
 .hero{
-padding:20px;
+padding:24px;
 text-align:center;
 }
 
@@ -49,78 +50,98 @@ font-size:34px;
 margin-bottom:10px;
 }
 
-.dashboard{
+.stats{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:12px;
 padding:0 16px 20px;
 }
 
-.box{
+.stat{
 background:#111827;
-padding:16px;
+padding:18px;
 border-radius:20px;
 text-align:center;
 }
 
-#feed{
+#appFeed{
 display:flex;
 flex-direction:column;
 gap:24px;
-padding:16px;
+padding:20px;
 }
 
 .card{
-min-height:320px;
+background:linear-gradient(135deg,#1e293b,#334155);
 border-radius:28px;
 padding:28px;
+min-height:320px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-background:linear-gradient(135deg,#1e293b,#334155);
-box-shadow:0 10px 30px rgba(0,0,0,.4);
+box-shadow:0 10px 30px rgba(0,0,0,.35);
 transition:.3s ease;
 }
 
 .card:hover{
-transform:translateY(-4px) scale(1.02);
+transform:translateY(-4px) scale(1.01);
 }
 
 .emoji{
-font-size:80px;
-}
-
-.play-btn{
-margin-top:20px;
-padding:18px;
-border:none;
-border-radius:999px;
-background:#22c55e;
-color:white;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
+font-size:82px;
+margin-bottom:10px;
 }
 
 .tag{
 display:inline-block;
-padding:6px 12px;
+padding:8px 14px;
 background:#0f172a;
 border-radius:999px;
-margin-top:12px;
 font-size:12px;
+margin-top:12px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-top:20px;
+}
+
+.play-btn,
+.github-btn{
+flex:1;
+padding:16px;
+border:none;
+border-radius:999px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.play-btn{
+background:#22c55e;
+color:white;
+}
+
+.github-btn{
+background:#334155;
+color:white;
+text-decoration:none;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .modal{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.8);
 display:flex;
 justify-content:center;
 align-items:center;
+background:rgba(0,0,0,.8);
 }
 
-.modal-content{
+.modal-box{
 background:#111827;
 padding:30px;
 border-radius:24px;
@@ -129,7 +150,7 @@ max-width:320px;
 text-align:center;
 }
 
-.modal-content button{
+.modal-box button{
 margin-top:20px;
 width:100%;
 padding:16px;

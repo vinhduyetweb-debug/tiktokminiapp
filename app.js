@@ -1,3 +1,4 @@
+
 async function loadApps(){
 
 const response = await fetch('./datasets/apps.json');
@@ -5,7 +6,7 @@ const apps = await response.json();
 
 document.getElementById('appCount').innerText = apps.length;
 
-const feed = document.getElementById('feed');
+const feed = document.getElementById('appFeed');
 
 apps.forEach(app=>{
 
@@ -24,10 +25,14 @@ card.innerHTML = `
 <div class="tag">${app.category}</div>
 </div>
 
-<div>
+<div class="actions">
 <button class="play-btn" onclick="playApp('${app.url}')">
-▶ PLAY NOW
+▶ OPEN APP
 </button>
+
+<a class="github-btn" target="_blank" href="${app.github}">
+💻 SOURCE
+</a>
 </div>
 `;
 
@@ -40,32 +45,32 @@ feed.appendChild(card);
 function playApp(url){
 
 let coins = parseInt(localStorage.getItem('coins') || 0);
+let xp = parseInt(localStorage.getItem('xp') || 0);
 
-coins += 2;
+coins += 3;
+xp += 1;
 
 localStorage.setItem('coins', coins);
+localStorage.setItem('xp', xp);
 
-window.location.href = url;
+window.open(url,'_blank');
 
 }
 
 function init(){
 
-const coins = localStorage.getItem('coins') || 0;
+document.getElementById('coins').innerText =
+localStorage.getItem('coins') || 0;
 
-document.getElementById('coins').innerText = coins;
-
-const achievements =
-localStorage.getItem('achievements') || 0;
-
-document.getElementById('achievements').innerText =
-achievements;
+document.getElementById('xp').innerText =
+localStorage.getItem('xp') || 0;
 
 }
 
-function dailyReward(){
+function claimReward(){
 
-let coins = parseInt(localStorage.getItem('coins') || 0);
+let coins =
+parseInt(localStorage.getItem('coins') || 0);
 
 coins += 20;
 
@@ -83,8 +88,8 @@ document.getElementById('rewardModal').classList.add('hidden');
 
 }
 
-document.getElementById('rewardBtn').onclick = dailyReward;
+document.getElementById('rewardBtn').onclick =
+claimReward;
 
 loadApps();
-
 init();

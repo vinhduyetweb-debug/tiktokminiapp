@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mini App Admin</title>
-
+<title>Admin Dashboard</title>
 <style>
 body{
 font-family:Arial;
@@ -12,91 +12,35 @@ background:#020617;
 color:white;
 padding:20px;
 }
-
-input,textarea,select{
-width:100%;
-padding:14px;
-margin-top:12px;
-border:none;
-border-radius:14px;
-}
-
-button{
-margin-top:20px;
-width:100%;
-padding:16px;
-border:none;
-border-radius:999px;
-background:#22c55e;
-color:white;
-font-size:18px;
-}
-
-pre{
-margin-top:20px;
-padding:20px;
-border-radius:20px;
+.card{
 background:#111827;
-overflow:auto;
+padding:24px;
+border-radius:20px;
+margin-top:20px;
 }
 </style>
-
 </head>
 <body>
 
-<h1>➕ Mini App Generator V2</h1>
+<h1>⚙ TikTok Mini App Platform V3</h1>
 
-<input id="name" placeholder="App Name">
+<div class="card">
+<h2>Integrated Apps</h2>
+<p>Total apps integrated: 12</p>
+<p>All apps are connected through shared ecosystem.</p>
+</div>
 
-<input id="emoji" placeholder="Emoji">
-
-<input id="slug" placeholder="app-slug">
-
-<select id="category">
-<option>Kids Quiz</option>
-<option>Learning</option>
-<option>Brain Game</option>
-<option>AI Kids</option>
-</select>
-
-<textarea id="description"
-placeholder="Description"></textarea>
-
-<button onclick="generate()">Generate App JSON</button>
-
-<pre id="output"></pre>
-
-<script>
-
-function generate(){
-
-const app = {
-
-id: document.getElementById('slug').value,
-
-name: document.getElementById('name').value,
-
-emoji: document.getElementById('emoji').value,
-
-description:
-document.getElementById('description').value,
-
-category:
-document.getElementById('category').value,
-
-url:
-'/apps/' +
-document.getElementById('slug').value +
-'/'
-
-};
-
-document.getElementById('output').innerText =
-JSON.stringify(app,null,2);
-
-}
-
-</script>
+<div class="card">
+<h2>Features Enabled</h2>
+<ul>
+<li>Coin System</li>
+<li>XP Tracking</li>
+<li>Daily Reward</li>
+<li>Cross-App Ecosystem</li>
+<li>GitHub Source Access</li>
+<li>Vercel App Integration</li>
+</ul>
+</div>
 
 </body>
 </html>
