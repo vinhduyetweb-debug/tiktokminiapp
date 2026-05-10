@@ -1,0 +1,12 @@
+[
+  {
+    "emoji": "\ud83d\udd24",
+    "question": "Which letter comes after A?",
+    "correct": "B",
+    "answers": [
+      "B",
+      "D",
+      "Z"
+    ]
+  }
+]

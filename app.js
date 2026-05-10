@@ -10,13 +10,13 @@ async function loadApps() {
 
     card.innerHTML = `
       <div>
-        <div style="font-size:64px">${app.emoji}</div>
-        <h3>${app.name}</h3>
+        <div class="app-emoji">${app.emoji}</div>
+        <h2>${app.name}</h2>
         <p>${app.description}</p>
       </div>
 
       <button class="play-btn" onclick="openApp('${app.url}')">
-        PLAY NOW
+        ▶ PLAY NOW
       </button>
     `;
 
@@ -24,9 +24,38 @@ async function loadApps() {
   });
 }
 
-function openApp(url) {
+function openApp(url){
   localStorage.setItem('lastPlayed', url);
   window.location.href = url;
 }
 
+function initCoins(){
+  const coins = localStorage.getItem('coins') || 0;
+  document.getElementById('coinCount').innerText = coins;
+}
+
+function initLevel(){
+  const level = localStorage.getItem('level') || 1;
+  document.getElementById('levelCount').innerText = level;
+}
+
+function claimDailyReward(){
+  let coins = parseInt(localStorage.getItem('coins') || 0);
+  coins += 20;
+
+  localStorage.setItem('coins', coins);
+
+  document.getElementById('coinCount').innerText = coins;
+
+  document.getElementById('rewardModal').classList.remove('hidden');
+}
+
+function closeReward(){
+  document.getElementById('rewardModal').classList.add('hidden');
+}
+
+document.getElementById('dailyRewardBtn').onclick = claimDailyReward;
+
 loadApps();
+initCoins();
+initLevel();

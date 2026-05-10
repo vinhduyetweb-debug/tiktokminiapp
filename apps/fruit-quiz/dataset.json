@@ -1,0 +1,12 @@
+[
+  {
+    "emoji": "\ud83c\udf4e",
+    "question": "Which fruit is red?",
+    "correct": "Apple",
+    "answers": [
+      "Apple",
+      "Banana",
+      "Orange"
+    ]
+  }
+]

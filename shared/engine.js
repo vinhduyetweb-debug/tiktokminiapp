@@ -1,22 +1,28 @@
-class MiniAppEngine {
-  constructor(dataset) {
-    this.dataset = dataset;
-    this.score = 0;
-    this.current = 0;
-  }
+class MiniAppEngine{
+constructor(dataset){
+this.dataset = dataset;
+this.current = 0;
+this.score = 0;
+}
 
-  getQuestion() {
-    return this.dataset[this.current];
-  }
+getQuestion(){
+return this.dataset[this.current];
+}
 
-  nextQuestion() {
-    this.current++;
-    if (this.current >= this.dataset.length) {
-      this.current = 0;
-    }
-  }
+nextQuestion(){
+this.current++;
 
-  addScore() {
-    this.score++;
-  }
+if(this.current >= this.dataset.length){
+this.current = 0;
+}
+}
+
+addScore(){
+this.score++;
+
+let coins = parseInt(localStorage.getItem('coins') || 0);
+coins += 5;
+
+localStorage.setItem('coins', coins);
+}
 }

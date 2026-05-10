@@ -2,8 +2,22 @@
   {
     "id": "animal-quiz",
     "name": "Animal Quiz",
-    "emoji": "🐶",
+    "emoji": "\ud83d\udc36",
     "description": "Guess cute animals",
     "url": "/apps/animal-quiz/"
+  },
+  {
+    "id": "fruit-quiz",
+    "name": "Fruit Quiz",
+    "emoji": "\ud83c\udf4e",
+    "description": "Learn fruits with fun",
+    "url": "/apps/fruit-quiz/"
+  },
+  {
+    "id": "alphabet-kids",
+    "name": "Alphabet Kids",
+    "emoji": "\ud83d\udd24",
+    "description": "Learn ABC with fun",
+    "url": "/apps/alphabet-kids/"
   }
 ]
