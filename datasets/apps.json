@@ -1,0 +1,9 @@
+[
+  {
+    "id": "animal-quiz",
+    "name": "Animal Quiz",
+    "emoji": "🐶",
+    "description": "Guess cute animals",
+    "url": "/apps/animal-quiz/"
+  }
+]

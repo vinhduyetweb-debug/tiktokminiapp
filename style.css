@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  overflow-x: hidden;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: rgba(0,0,0,.6);
+}
+
+.hero {
+  padding: 20px;
+}
+
+#appFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px;
+}
+
+.app-card {
+  background: linear-gradient(135deg,#1e293b,#334155);
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.play-btn {
+  margin-top: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+}

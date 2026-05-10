@@ -1,0 +1,14 @@
+[
+  {
+    "emoji": "🐶",
+    "question": "Which animal says woof?",
+    "correct": "Dog",
+    "answers": ["Dog", "Cat", "Duck"]
+  },
+  {
+    "emoji": "🐱",
+    "question": "Which animal says meow?",
+    "correct": "Cat",
+    "answers": ["Bird", "Cat", "Cow"]
+  }
+]
