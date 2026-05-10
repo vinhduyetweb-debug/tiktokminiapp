@@ -1,110 +1,74 @@
 [
   {
-    "id": 1,
     "name": "KHO BÁU KÝ ỨC",
     "emoji": "🧠",
     "category": "Memory",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.khobaukyuc",
-    "url": "https://vinh-khobaukyuc.vercel.app/",
-    "description": "KHO BÁU KÝ ỨC mini app"
+    "url": "https://vinh-khobaukyuc.vercel.app/"
   },
   {
-    "id": 2,
     "name": "TRA CỨU TÀI LIỆU",
     "emoji": "📚",
     "category": "Tools",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.tracuutailieu",
-    "url": "https://vinhtracuutailieu.vercel.app/",
-    "description": "TRA CỨU TÀI LIỆU mini app"
+    "url": "https://vinhtracuutailieu.vercel.app/"
   },
   {
-    "id": 3,
     "name": "XEM VIDEO",
     "emoji": "🎬",
     "category": "Media",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.xemvideo",
-    "url": "https://vinh-xemvideo.vercel.app/",
-    "description": "XEM VIDEO mini app"
+    "url": "https://vinh-xemvideo.vercel.app/"
   },
   {
-    "id": 4,
     "name": "ĐOÁN TRÁI CÂY",
     "emoji": "🍎",
     "category": "Kids Quiz",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.doantraicay",
-    "url": "https://vinh-doantraicay.vercel.app/",
-    "description": "ĐOÁN TRÁI CÂY mini app"
+    "url": "https://vinh-doantraicay.vercel.app/"
   },
   {
-    "id": 5,
     "name": "ĐOÁN NGHỀ NGHIỆP",
     "emoji": "👨‍🚒",
     "category": "Kids Quiz",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.doannghenghiep",
-    "url": "https://vinh-doannghenghiep.vercel.app/",
-    "description": "ĐOÁN NGHỀ NGHIỆP mini app"
+    "url": "https://vinh-doannghenghiep.vercel.app/"
   },
   {
-    "id": 6,
     "name": "ĐOÁN CON VẬT",
     "emoji": "🐶",
     "category": "Kids Quiz",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.doanconvat",
-    "url": "https://vinh-doanconvat.vercel.app/",
-    "description": "ĐOÁN CON VẬT mini app"
+    "url": "https://vinh-doanconvat.vercel.app/"
   },
   {
-    "id": 7,
     "name": "ĐOÁN ĐỒ VẬT",
     "emoji": "🧸",
     "category": "Kids Quiz",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.doandovat",
-    "url": "https://vinh-doandovat.vercel.app/",
-    "description": "ĐOÁN ĐỒ VẬT mini app"
+    "url": "https://vinh-doandovat.vercel.app/"
   },
   {
-    "id": 8,
     "name": "TÔ MÀU",
     "emoji": "🎨",
     "category": "Creative",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.paint",
-    "url": "https://vinh-paint.vercel.app/",
-    "description": "TÔ MÀU mini app"
+    "url": "https://vinh-paint.vercel.app/"
   },
   {
-    "id": 9,
     "name": "XEM VIDEO 2",
     "emoji": "📱",
     "category": "Media",
-    "github": "https://github.com/vinhduyetweb-debug/vinh.tiktok",
-    "url": "https://vinh-tiktok.vercel.app/",
-    "description": "XEM VIDEO 2 mini app"
+    "url": "https://vinh-tiktok.vercel.app/"
   },
   {
-    "id": 10,
     "name": "XEM BTC",
     "emoji": "₿",
     "category": "Finance",
-    "github": "https://github.com/vinhduyetweb-debug/vinh_btc",
-    "url": "https://vinh-btc.vercel.app/",
-    "description": "XEM BTC mini app"
+    "url": "https://vinh-btc.vercel.app/"
   },
   {
-    "id": 11,
     "name": "TẠO MÃ QR",
     "emoji": "🔳",
     "category": "Tools",
-    "github": "https://github.com/vinhduyetweb-debug/vinhqr",
-    "url": "https://vinhqr.vercel.app/",
-    "description": "TẠO MÃ QR mini app"
+    "url": "https://vinhqr.vercel.app/"
   },
   {
-    "id": 12,
     "name": "XEM CRYPTO",
     "emoji": "💰",
     "category": "Finance",
-    "github": "https://github.com/vinhduyetweb-debug/vinh_crypto",
-    "url": "https://vinhcrypto.vercel.app/",
-    "description": "XEM CRYPTO mini app"
+    "url": "https://vinhcrypto.vercel.app/"
   }
 ]
