@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#020617">
-<meta name="description" content="TikTokMiniApp is a portfolio-style mini app gallery powered by apps.json, with live Vercel apps and GitHub repositories.">
+<meta name="description" content="TikTokMiniApp is a portfolio-style mini app gallery with live Vercel apps and GitHub repositories.">
 <meta property="og:title" content="TikTokMiniApp - Portfolio Mini App Hub">
-<meta property="og:description" content="Browse Vinh's live Vercel mini apps, view GitHub repositories, and manage the app registry from GitHub.">
+<meta property="og:description" content="Browse Vinh's live Vercel mini apps and GitHub repositories.">
 <meta property="og:type" content="website">
 <title>TikTokMiniApp - Portfolio Mini App Hub</title>
-<script type="module" src="/src/main.js"></script>
+<link rel="stylesheet" href="/src/styles/style.css">
 </head>
 <body>
 
@@ -19,95 +19,243 @@
 <h1>TikTokMiniApp Gallery</h1>
 <p>Live Vercel mini apps and GitHub source links from one mobile-friendly hub.</p>
 </div>
-
-<div class="admin-actions">
-<span id="adminNote" class="admin-note hidden">Admin verified. Updates are saved through the secure API.</span>
-<button id="adminLoginBtn" class="secondary-action hidden" type="button">Admin Login</button>
-<button id="addAppBtn" class="add-app-btn hidden" type="button">➕ Add App</button>
-</div>
 </header>
 
 <main>
 <section class="hero" aria-labelledby="heroTitle">
 <div>
 <h2 id="heroTitle">Mini app portfolio</h2>
-<p>Every card is rendered from bundled app registry. TikTokMiniApp itself is intentionally excluded from the gallery.</p>
+<p>Static emergency gallery. Cards are embedded directly in this page so production works even if JavaScript fails.</p>
 </div>
 <div class="app-count">
 <span>Apps shown</span>
-<strong id="appCount">0</strong>
+<strong id="appCount">17</strong>
 </div>
 </section>
 
-<section class="toolbar" aria-label="Search and filter apps">
-<label>
-<span>Search</span>
-<input id="searchInput" type="search" placeholder="Search by name or description">
-</label>
+<section id="appFeed" class="app-grid" aria-label="Mini app list">
+<article class="app-card">
+<div class="app-icon">📚</div>
+<div class="app-content">
+<h2>ABCMYANH</h2>
+<p>Mini app học chữ cái và số cho trẻ em.</p>
+<div class="badges"><span class="badge">education</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://abcmyanh.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/ABCMYANH" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
 
-<label>
-<span>Category</span>
-<select id="categoryFilter">
-<option value="">All categories</option>
-</select>
-</label>
+<article class="app-card">
+<div class="app-icon">🐶</div>
+<div class="app-content">
+<h2>Đoán Con Vật</h2>
+<p>Mini game đoán con vật cho trẻ em.</p>
+<div class="badges"><span class="badge">education</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinh-doanconvat.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.doanconvat" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
 
-<button id="clearFiltersBtn" class="secondary-action" type="button">Clear</button>
+<article class="app-card">
+<div class="app-icon">🧸</div>
+<div class="app-content">
+<h2>Đoán Đồ Vật</h2>
+<p>Mini game đoán đồ vật cho trẻ em.</p>
+<div class="badges"><span class="badge">education</span><span class="badge status-github-only">GitHub only</span></div>
+</div>
+<div class="card-actions">
+<button class="secondary-action" type="button" disabled>No Live URL</button>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.doandovat" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">👨‍🚒</div>
+<div class="app-content">
+<h2>Đoán Nghề Nghiệp</h2>
+<p>Mini game khám phá nghề nghiệp.</p>
+<div class="badges"><span class="badge">education</span><span class="badge status-github-only">GitHub only</span></div>
+</div>
+<div class="card-actions">
+<button class="secondary-action" type="button" disabled>No Live URL</button>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.doannghenghiep" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">🍎</div>
+<div class="app-content">
+<h2>Đoán Trái Cây</h2>
+<p>Mini game học trái cây qua câu đố.</p>
+<div class="badges"><span class="badge">education</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinh-doantraicay.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.doantraicay" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">🧠</div>
+<div class="app-content">
+<h2>Kho Báu Ký Ức</h2>
+<p>Mini game rèn luyện trí nhớ.</p>
+<div class="badges"><span class="badge">game</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinh-khobaukyuc.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.khobaukyuc" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">📱</div>
+<div class="app-content">
+<h2>PCCCK V8</h2>
+<p>Mini app portfolio được phát hiện từ GitHub.</p>
+<div class="badges"><span class="badge">portfolio</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://pccckv8.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/pccckv8" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">📖</div>
+<div class="app-content">
+<h2>Tra Cứu Tài Liệu</h2>
+<p>Công cụ tra cứu tài liệu nhanh.</p>
+<div class="badges"><span class="badge">tool</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinhtracuutailieu.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.tracuutailieu" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">🌟</div>
+<div class="app-content">
+<h2>Ước Mộng Hề Nghiệp</h2>
+<p>Mini app portfolio được phát hiện từ GitHub.</p>
+<div class="badges"><span class="badge">portfolio</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://uocmonghenghiep.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/uocmonghenghiep" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">₿</div>
+<div class="app-content">
+<h2>Vinh BTC</h2>
+<p>Ứng dụng theo dõi Bitcoin.</p>
+<div class="badges"><span class="badge">finance</span><span class="badge status-github-only">GitHub only</span></div>
+</div>
+<div class="card-actions">
+<button class="secondary-action" type="button" disabled>No Live URL</button>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh_btc" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">💰</div>
+<div class="app-content">
+<h2>Vinh Crypto</h2>
+<p>Ứng dụng theo dõi thị trường crypto.</p>
+<div class="badges"><span class="badge">finance</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinhcrypto.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh_crypto" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">🖼️</div>
+<div class="app-content">
+<h2>Vinh Ghép Ảnh</h2>
+<p>Ứng dụng ghép ảnh sáng tạo.</p>
+<div class="badges"><span class="badge">creative</span><span class="badge status-github-only">GitHub only</span></div>
+</div>
+<div class="card-actions">
+<button class="secondary-action" type="button" disabled>No Live URL</button>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.ghepanh" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">🎨</div>
+<div class="app-content">
+<h2>Vinh Paint</h2>
+<p>Ứng dụng tô màu sáng tạo.</p>
+<div class="badges"><span class="badge">creative</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinh-paint.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.paint" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">🔳</div>
+<div class="app-content">
+<h2>Vinh QR</h2>
+<p>Ứng dụng tạo mã QR.</p>
+<div class="badges"><span class="badge">tool</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinhqr.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinhqr" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">📱</div>
+<div class="app-content">
+<h2>Vinh TikTok</h2>
+<p>Mini app trải nghiệm video dọc.</p>
+<div class="badges"><span class="badge">media</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinh-tiktok.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.tiktok" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">💳</div>
+<div class="app-content">
+<h2>Vinh Tín Dụng</h2>
+<p>Ứng dụng tính toán hoặc tra cứu tín dụng.</p>
+<div class="badges"><span class="badge">finance</span><span class="badge status-github-only">GitHub only</span></div>
+</div>
+<div class="card-actions">
+<button class="secondary-action" type="button" disabled>No Live URL</button>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.tindung" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
+
+<article class="app-card">
+<div class="app-icon">🎬</div>
+<div class="app-content">
+<h2>Xem Video</h2>
+<p>Mini app xem video giải trí.</p>
+<div class="badges"><span class="badge">media</span><span class="badge status-live">Live</span></div>
+</div>
+<div class="card-actions">
+<a class="primary-action" href="https://vinh-xemvideo.vercel.app/" target="_blank" rel="noopener noreferrer">Open App</a>
+<a class="secondary-action" href="https://github.com/vinhduyetweb-debug/vinh.xemvideo" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</article>
 </section>
-
-<section id="appFeed" class="app-grid" aria-label="Mini app list"></section>
 </main>
-
-<div id="addAppModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="addAppTitle">
-<div class="modal-box">
-<div class="modal-header">
-<h2 id="addAppTitle">Add App to apps.json</h2>
-<button id="closeAddAppBtn" class="icon-btn" type="button" aria-label="Close add app form">×</button>
-</div>
-
-<form id="addAppForm" class="add-app-form">
-<label>
-<span>App name *</span>
-<input name="name" type="text" autocomplete="off" required>
-</label>
-
-<label>
-<span>Vercel live URL *</span>
-<input name="liveUrl" type="url" placeholder="https://your-app.vercel.app/" required>
-</label>
-
-<label>
-<span>GitHub URL</span>
-<input name="githubUrl" type="url" placeholder="https://github.com/user/repo">
-</label>
-
-<label>
-<span>Description</span>
-<textarea name="description" rows="3" placeholder="Short portfolio description"></textarea>
-</label>
-
-<div class="form-row">
-<label>
-<span>Category</span>
-<input name="category" type="text" placeholder="education">
-</label>
-
-<label>
-<span>Icon</span>
-<input name="icon" type="text" maxlength="4" placeholder="📱">
-</label>
-</div>
-
-<p id="addAppError" class="form-error" role="alert"></p>
-<p id="addAppStatus" class="form-status" role="status" aria-live="polite"></p>
-
-<div class="form-actions">
-<button id="cancelAddAppBtn" class="secondary-action" type="button">Cancel</button>
-<button class="primary-action" type="submit">Save App</button>
-</div>
-</form>
-</div>
-</div>
 
 </body>
 </html>
