@@ -1,27 +1,50 @@
 import { apps } from './data/apps.js';
 import './styles/style.css';
-import { deleteAppViaApi, setupAddAppModal } from './core/addAppModal.js';
-import {
-  getVisibleRegistryApps,
-  renderApps,
-  renderCategoryFilter
-} from './core/renderApps.js';
+import { setupAddAppModal } from './core/addAppModal.js';
 
 const canAttemptAdminLogin = new URLSearchParams(window.location.search).get('admin') === '1';
-const isDebugMode = new URLSearchParams(window.location.search).get('debug') === '1';
-const isDevelopment = import.meta.env.DEV;
 
 let adminSecret = '';
 let isAdmin = false;
-
-const registry = {
-  current: normalizeApps(apps)
-};
+let registry = normalizeApps(apps).filter(isVisibleApp);
 
 const state = {
   search: '',
   category: ''
 };
+
+function normalizeApps(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (Array.isArray(value?.apps)) {
+    return value.apps;
+  }
+
+  return [];
+}
+
+function normalizeUrl(url) {
+  return String(url || '').trim().replace(/\/+$/, '').toLowerCase();
+}
+
+function isVisibleApp(app) {
+  if (!app || typeof app !== 'object' || !app.id || !app.name) {
+    return false;
+  }
+
+  const id = String(app.id).trim().toLowerCase();
+  const githubUrl = normalizeUrl(app.githubUrl);
+  const liveUrl = normalizeUrl(app.liveUrl);
+
+  return !(
+    id === 'tiktokminiapp' ||
+    id === 'tiktok-miniapp' ||
+    githubUrl.includes('/tiktokminiapp') ||
+    liveUrl === 'https://tiktokminiapp.vercel.app'
+  );
+}
 
 function getElements() {
   return {
@@ -36,76 +59,144 @@ function getElements() {
   };
 }
 
-function refresh(nextApps = registry.current) {
-  registry.current = normalizeApps(nextApps);
-
-  const elements = getElements();
-  const visibleApps = getVisibleRegistryApps(registry.current);
-  renderDiagnostics(elements, visibleApps.length);
-
-  const apps = renderApps({
-    apps: registry.current,
-    feedElement: elements.feed,
-    countElement: elements.count,
-    filters: state,
-    isAdmin,
-    onDelete: handleDelete,
-    debug: isDevelopment
-  });
-
-  renderCategoryFilter(elements.category, apps, state.category);
+function openExternal(url) {
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-function renderDiagnostics(elements, visibleCount) {
-  if (!isDebugMode) {
+function matchesFilters(app) {
+  const search = state.search.trim().toLowerCase();
+  const category = state.category;
+  const text = `${app.name} ${app.description || ''}`.toLowerCase();
+
+  return (!search || text.includes(search)) && (!category || app.category === category);
+}
+
+function createButton(label, className, onClick, disabled = false) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = className;
+  button.textContent = label;
+  button.disabled = disabled;
+  button.addEventListener('click', onClick);
+  return button;
+}
+
+function getStatusLabel(status) {
+  if (status === 'github-only') {
+    return 'GitHub only';
+  }
+
+  if (status === 'archived') {
+    return 'Archived';
+  }
+
+  return 'Live';
+}
+
+function createCard(app) {
+  const card = document.createElement('article');
+  card.className = 'app-card';
+
+  const icon = document.createElement('div');
+  icon.className = 'app-icon';
+  icon.textContent = app.icon || '📱';
+
+  const content = document.createElement('div');
+  content.className = 'app-content';
+
+  const title = document.createElement('h2');
+  title.textContent = app.name;
+
+  const description = document.createElement('p');
+  description.textContent = app.description || 'Portfolio mini app.';
+
+  const badges = document.createElement('div');
+  badges.className = 'badges';
+
+  const category = document.createElement('span');
+  category.className = 'badge';
+  category.textContent = app.category || 'uncategorized';
+
+  const status = document.createElement('span');
+  status.className = `badge status-${app.status || 'live'}`;
+  status.textContent = getStatusLabel(app.status);
+
+  badges.append(category, status);
+  content.append(title, description, badges);
+
+  const actions = document.createElement('div');
+  actions.className = 'card-actions';
+
+  if (app.liveUrl && app.status !== 'archived') {
+    actions.appendChild(createButton('Open App', 'primary-action', () => openExternal(app.liveUrl)));
+  } else {
+    actions.appendChild(createButton('No Live URL', 'secondary-action', () => {}, true));
+  }
+
+  if (app.githubUrl) {
+    actions.appendChild(createButton('GitHub', 'secondary-action', () => openExternal(app.githubUrl)));
+  }
+
+  card.append(icon, content, actions);
+  return card;
+}
+
+function renderCategories() {
+  const elements = getElements();
+
+  if (!elements.category) {
     return;
   }
 
-  let panel = document.getElementById('appDebugPanel');
+  const currentValue = state.category;
+  const categories = [...new Set(registry.map((app) => app.category).filter(Boolean))].sort();
 
-  if (!panel) {
-    panel = document.createElement('section');
-    panel.id = 'appDebugPanel';
-    panel.setAttribute('aria-label', 'App rendering diagnostics');
-    panel.style.cssText = [
-      'margin:16px 20px',
-      'padding:16px',
-      'border:1px solid #facc15',
-      'border-radius:8px',
-      'background:#422006',
-      'color:#fef3c7',
-      'font:14px/1.5 Arial,sans-serif',
-      'white-space:pre-wrap'
-    ].join(';');
+  elements.category.replaceChildren();
 
-    document.querySelector('main')?.prepend(panel);
-  }
+  const allOption = document.createElement('option');
+  allOption.value = '';
+  allOption.textContent = 'All categories';
+  elements.category.appendChild(allOption);
 
-  const diagnostics = {
-    'imported apps count': normalizeApps(apps).length,
-    'registry.current count': registry.current.length,
-    'visible registry count': visibleCount,
-    'current search value': state.search || '',
-    'current category value': state.category || '',
-    'appFeed exists': Boolean(elements.feed),
-    'appCount exists': Boolean(elements.count)
-  };
+  categories.forEach((category) => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.textContent = category;
+    elements.category.appendChild(option);
+  });
 
-  panel.textContent = Object.entries(diagnostics)
-    .map(([label, value]) => `${label}: ${value}`)
-    .join('\n');
+  elements.category.value = currentValue;
 }
 
-function normalizeApps(value) {
-  if (Array.isArray(value)) {
-    return value;
+function renderGallery() {
+  const elements = getElements();
+  const visibleApps = registry.filter(matchesFilters);
+
+  if (elements.count) {
+    elements.count.textContent = String(visibleApps.length);
   }
 
-  if (Array.isArray(value?.apps)) {
-    return value.apps;
+  if (!elements.feed) {
+    return;
   }
 
-  return [];
+  if (!visibleApps.length) {
+    const empty = document.createElement('div');
+    empty.className = 'empty-state';
+    empty.textContent = registry.length
+      ? 'No apps match the current search or filter.'
+      : 'No apps found. Check src/data/apps.js.';
+    elements.feed.replaceChildren(empty);
+    return;
+  }
+
+  elements.feed.replaceChildren(...visibleApps.map(createCard));
+}
+
+function refresh(nextApps = registry) {
+  registry = normalizeApps(nextApps).filter(isVisibleApp);
+  renderCategories();
+  renderGallery();
 }
 
 async function verifyAdminSecret(secret) {
@@ -117,16 +208,6 @@ async function verifyAdminSecret(secret) {
   });
 
   return response.ok;
-}
-
-async function loadRegistry() {
-  registry.current = normalizeApps(apps);
-
-  if (isDevelopment) {
-    const visibleApps = getVisibleRegistryApps(registry.current);
-    console.info('[TikTokMiniApp] raw apps loaded:', registry.current.length);
-    console.info('[TikTokMiniApp] after hub exclusion:', visibleApps.length);
-  }
 }
 
 async function handleAdminLogin() {
@@ -146,29 +227,6 @@ async function handleAdminLogin() {
   adminSecret = secret;
   isAdmin = true;
   updateAdminUi();
-  refresh();
-}
-
-async function handleDelete(appId) {
-  if (!isAdmin || !adminSecret) {
-    return;
-  }
-
-  if (!window.confirm('Delete this user-added app from apps.json?')) {
-    return;
-  }
-
-  try {
-    const nextApps = await deleteAppViaApi({
-      adminSecret,
-      appId,
-      apps: registry
-    });
-
-    refresh(nextApps);
-  } catch (error) {
-    window.alert(error.message || 'Unable to delete app.');
-  }
 }
 
 function bindFilters() {
@@ -176,12 +234,12 @@ function bindFilters() {
 
   elements.search?.addEventListener('input', (event) => {
     state.search = event.target.value;
-    refresh();
+    renderGallery();
   });
 
   elements.category?.addEventListener('change', (event) => {
     state.category = event.target.value;
-    refresh();
+    renderGallery();
   });
 
   elements.clear?.addEventListener('click', () => {
@@ -196,7 +254,7 @@ function bindFilters() {
       elements.category.value = '';
     }
 
-    refresh();
+    renderGallery();
   });
 }
 
@@ -208,19 +266,21 @@ function updateAdminUi() {
   elements.adminNote?.classList.toggle('hidden', !isAdmin);
 }
 
-async function boot() {
-  loadRegistry();
+function boot() {
+  renderCategories();
+  renderGallery();
   bindFilters();
+
   getElements().adminLogin?.addEventListener('click', handleAdminLogin);
   updateAdminUi();
+
   setupAddAppModal({
-    apps: registry,
+    apps: { current: registry },
     getAdminSecret: () => adminSecret,
-    onSave: async (nextApps) => {
+    onSave: (nextApps) => {
       refresh(nextApps);
     }
   });
-  refresh();
 }
 
 boot();
