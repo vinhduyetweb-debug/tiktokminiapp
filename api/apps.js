@@ -5,7 +5,7 @@ const DEFAULT_CONFIG = {
   owner: 'vinhduyetweb-debug',
   repo: 'tiktokminiapp',
   branch: 'main',
-  path: 'src/data/apps.json'
+  path: 'public/apps.json'
 };
 
 function getConfig() {
@@ -161,7 +161,7 @@ async function loadGitHubRegistry() {
 }
 
 async function loadStaticRegistry() {
-  const filePath = path.join(process.cwd(), 'src', 'data', 'apps.json');
+  const filePath = path.join(process.cwd(), 'public', 'apps.json');
   const file = await fs.readFile(filePath, 'utf8');
   return normalizeRegistry(JSON.parse(file));
 }

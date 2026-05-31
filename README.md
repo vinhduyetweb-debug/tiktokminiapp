@@ -4,11 +4,13 @@ TikTokMiniApp is a portfolio-style mini app hub. Public users can view, search, 
 
 ## Source Of Truth
 
-The registry lives in:
+The production registry lives in:
 
 ```text
-src/data/apps.json
+public/apps.json
 ```
+
+Vite copies this file to `dist/apps.json`, so production can load it with `fetch("/apps.json")`.
 
 Each app object uses:
 
@@ -27,7 +29,7 @@ Each app object uses:
 }
 ```
 
-TikTokMiniApp itself is intentionally excluded from the rendered list. The frontend loads the registry dynamically from `GET /api/apps`, with the bundled `src/data/apps.json` used as a fallback if the API is unavailable.
+TikTokMiniApp itself is intentionally excluded from the rendered list. The frontend loads the registry dynamically with `fetch("/apps.json")`.
 
 ## Admin Add App
 
@@ -45,7 +47,7 @@ The frontend never asks for, stores, or sends a GitHub token. GitHub writes happ
 
 - `POST /api/admin`: verifies the admin secret.
 - `GET /api/apps`: returns the current app registry.
-- `POST /api/apps`: appends a new app to `src/data/apps.json` in GitHub.
+- `POST /api/apps`: appends a new app to `public/apps.json` in GitHub.
 - `DELETE /api/apps`: deletes only `source: "user"` and `editable: true` apps.
 
 Required Vercel Environment Variables:
@@ -61,7 +63,7 @@ Optional Vercel Environment Variables:
 GITHUB_OWNER=vinhduyetweb-debug
 GITHUB_REPO=tiktokminiapp
 GITHUB_BRANCH=main
-GITHUB_APPS_PATH=src/data/apps.json
+GITHUB_APPS_PATH=public/apps.json
 ```
 
 ## Rendering

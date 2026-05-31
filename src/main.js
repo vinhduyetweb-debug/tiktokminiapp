@@ -1,4 +1,3 @@
-import appsJson from './data/apps.json';
 import './styles/style.css';
 import { deleteAppViaApi, setupAddAppModal } from './core/addAppModal.js';
 import {
@@ -14,7 +13,7 @@ let adminSecret = '';
 let isAdmin = false;
 
 const registry = {
-  current: normalizeApps(appsJson)
+  current: []
 };
 
 const state = {
@@ -76,20 +75,18 @@ async function verifyAdminSecret(secret) {
 }
 
 async function loadRegistry() {
-  const bundledApps = normalizeApps(appsJson);
-
   try {
-    const response = await fetch('/api/apps');
+    const response = await fetch('/apps.json', { cache: 'no-store' });
     const payload = await response.json();
-    const apiApps = normalizeApps(payload);
+    const publicApps = normalizeApps(payload);
 
-    if (!response.ok || payload.ok === false) {
+    if (!response.ok || !publicApps.length) {
       throw new Error('Unable to load registry.');
     }
 
-    registry.current = apiApps.length ? apiApps : bundledApps;
+    registry.current = publicApps;
   } catch {
-    registry.current = bundledApps;
+    registry.current = [];
   }
 
   if (isDevelopment) {

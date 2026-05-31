@@ -4,7 +4,7 @@ import process from 'node:process';
 
 const ROOT = process.cwd();
 const GENERATED_PATH = path.join(ROOT, 'apps.generated.json');
-const EXISTING_PATH = path.join(ROOT, 'src', 'data', 'apps.json');
+const EXISTING_PATH = path.join(ROOT, 'public', 'apps.json');
 const VERCEL_PROJECTS_PATH = path.join(ROOT, 'tools', 'vercel-projects.json');
 const FINAL_PATH = path.join(ROOT, 'apps.final.json');
 const REPORT_PATH = path.join(ROOT, 'tools', 'final-registry-report.md');
@@ -279,7 +279,7 @@ ${listDuplicates(duplicates)}
 Review apps.final.json. If it looks correct, replace the active registry with:
 
 \`\`\`powershell
-Copy-Item apps.final.json src\\data\\apps.json
+Copy-Item apps.final.json public\\apps.json
 cmd /c npm run build
 \`\`\`
 `;

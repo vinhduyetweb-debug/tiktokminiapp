@@ -6,7 +6,7 @@ TikTokMiniApp is a portfolio-style hub. It lists external mini apps and opens th
 
 ## Registry
 
-`src/data/apps.json` is the source of truth. The frontend dynamically loads the registry through `GET /api/apps`, with the bundled JSON used as a fallback if the API is unavailable.
+`public/apps.json` is the production source of truth. Vite copies it to `dist/apps.json`, and the frontend loads the registry with `fetch("/apps.json")`.
 
 App object shape:
 
@@ -36,7 +36,7 @@ Admin flow:
 3. Submit the admin secret to `POST /api/admin`.
 4. After validation, the frontend shows `Add App`.
 5. Add App submits to `POST /api/apps`.
-6. The serverless API validates input and commits `src/data/apps.json` to GitHub.
+6. The serverless API validates input and commits `public/apps.json` to GitHub.
 
 ## Security
 

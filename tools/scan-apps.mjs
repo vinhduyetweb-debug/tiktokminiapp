@@ -5,7 +5,7 @@ import process from 'node:process';
 const OWNER = 'vinhduyetweb-debug';
 const EXCLUDED_REPOS = new Set(['tiktokminiapp']);
 const ROOT = process.cwd();
-const EXISTING_APPS_PATH = path.join(ROOT, 'src', 'data', 'apps.json');
+const EXISTING_APPS_PATH = path.join(ROOT, 'public', 'apps.json');
 const GENERATED_APPS_PATH = path.join(ROOT, 'apps.generated.json');
 const REPORT_PATH = path.join(ROOT, 'tools', 'scan-report.md');
 const VERCEL_PROJECTS_PATH = path.join(ROOT, 'tools', 'vercel-projects.json');
@@ -274,7 +274,7 @@ Generated: ${new Date().toISOString()}
 - GitHub owner: ${OWNER}
 - Public GitHub repos found: ${repos.length}
 - App candidates generated: ${candidates.length}
-- Existing apps in src/data/apps.json: ${existingApps.length}
+- Existing apps in public/apps.json: ${existingApps.length}
 - Used tools/vercel-projects.json: ${usedVercelProjects ? 'yes' : 'no'}
 
 ## Apps Already Listed
@@ -307,7 +307,7 @@ ${formatDuplicateList(comparison.duplicateLiveUrls)}
 - Confirm categories and icons are correct.
 - Remove any repos that are not portfolio mini apps.
 - Keep TikTokMiniApp excluded from the final registry.
-- Copy reviewed entries from apps.generated.json into src/data/apps.json manually.
+- Copy reviewed entries from apps.generated.json into public/apps.json manually.
 `;
 }
 
