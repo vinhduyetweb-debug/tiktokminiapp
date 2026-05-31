@@ -186,7 +186,7 @@ export function renderApps({ apps, feedElement, countElement, filters, isAdmin, 
     empty.className = 'empty-state';
     empty.textContent = registryApps.length
       ? 'No apps match the current search or filter.'
-      : 'No apps found. Check public/apps.json.';
+      : 'No apps found. Check src/data/apps.js.';
     feedElement.replaceChildren(empty);
     return registryApps;
   }

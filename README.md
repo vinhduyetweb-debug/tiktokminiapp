@@ -4,13 +4,15 @@ TikTokMiniApp is a portfolio-style mini app hub. Public users can view, search, 
 
 ## Source Of Truth
 
-The production registry lives in:
+The production gallery registry is bundled from:
 
 ```text
-public/apps.json
+src/data/apps.js
 ```
 
-Vite copies this file to `dist/apps.json`, so production can load it with `fetch("/apps.json")`.
+This avoids production 404 issues from fetching a standalone JSON file at runtime.
+
+`public/apps.json` can remain as a copy/source artifact for the admin API workflow, but normal gallery rendering imports the bundled app array.
 
 Each app object uses:
 
@@ -29,7 +31,7 @@ Each app object uses:
 }
 ```
 
-TikTokMiniApp itself is intentionally excluded from the rendered list. The frontend loads the registry dynamically with `fetch("/apps.json")`.
+TikTokMiniApp itself is intentionally excluded from the rendered list. The frontend imports the bundled registry directly.
 
 ## Admin Add App
 

@@ -6,7 +6,9 @@ TikTokMiniApp is a portfolio-style hub. It lists external mini apps and opens th
 
 ## Registry
 
-`public/apps.json` is the production source of truth. Vite copies it to `dist/apps.json`, and the frontend loads the registry with `fetch("/apps.json")`.
+`src/data/apps.js` is the production gallery source. The frontend imports the bundled app array directly, so rendering does not depend on runtime JSON fetching.
+
+`public/apps.json` can remain as a copy/source artifact for the admin API workflow.
 
 App object shape:
 

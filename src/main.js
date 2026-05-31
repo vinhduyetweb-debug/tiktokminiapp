@@ -1,3 +1,4 @@
+import { apps } from './data/apps.js';
 import './styles/style.css';
 import { deleteAppViaApi, setupAddAppModal } from './core/addAppModal.js';
 import {
@@ -13,7 +14,7 @@ let adminSecret = '';
 let isAdmin = false;
 
 const registry = {
-  current: []
+  current: normalizeApps(apps)
 };
 
 const state = {
@@ -75,19 +76,7 @@ async function verifyAdminSecret(secret) {
 }
 
 async function loadRegistry() {
-  try {
-    const response = await fetch('/apps.json', { cache: 'no-store' });
-    const payload = await response.json();
-    const publicApps = normalizeApps(payload);
-
-    if (!response.ok || !publicApps.length) {
-      throw new Error('Unable to load registry.');
-    }
-
-    registry.current = publicApps;
-  } catch {
-    registry.current = [];
-  }
+  registry.current = normalizeApps(apps);
 
   if (isDevelopment) {
     const visibleApps = getVisibleRegistryApps(registry.current);
@@ -176,7 +165,7 @@ function updateAdminUi() {
 }
 
 async function boot() {
-  await loadRegistry();
+  loadRegistry();
   bindFilters();
   getElements().adminLogin?.addEventListener('click', handleAdminLogin);
   updateAdminUi();
@@ -185,8 +174,6 @@ async function boot() {
     getAdminSecret: () => adminSecret,
     onSave: async (nextApps) => {
       refresh(nextApps);
-      await loadRegistry();
-      refresh();
     }
   });
   refresh();
