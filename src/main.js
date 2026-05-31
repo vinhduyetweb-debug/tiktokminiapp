@@ -8,12 +8,13 @@ import {
 } from './core/renderApps.js';
 
 const canAttemptAdminLogin = new URLSearchParams(window.location.search).get('admin') === '1';
+const isDevelopment = import.meta.env.DEV;
 
 let adminSecret = '';
 let isAdmin = false;
 
 const registry = {
-  current: [...appsJson]
+  current: normalizeApps(appsJson)
 };
 
 const state = {
@@ -35,7 +36,7 @@ function getElements() {
 }
 
 function refresh(nextApps = registry.current) {
-  registry.current = [...nextApps];
+  registry.current = normalizeApps(nextApps);
 
   const elements = getElements();
   const apps = renderApps({
@@ -44,10 +45,23 @@ function refresh(nextApps = registry.current) {
     countElement: elements.count,
     filters: state,
     isAdmin,
-    onDelete: handleDelete
+    onDelete: handleDelete,
+    debug: isDevelopment
   });
 
   renderCategoryFilter(elements.category, apps, state.category);
+}
+
+function normalizeApps(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (Array.isArray(value?.apps)) {
+    return value.apps;
+  }
+
+  return [];
 }
 
 async function verifyAdminSecret(secret) {
@@ -62,17 +76,26 @@ async function verifyAdminSecret(secret) {
 }
 
 async function loadRegistry() {
+  const bundledApps = normalizeApps(appsJson);
+
   try {
     const response = await fetch('/api/apps');
     const payload = await response.json();
+    const apiApps = normalizeApps(payload);
 
-    if (!response.ok || payload.ok === false || !Array.isArray(payload.apps)) {
+    if (!response.ok || payload.ok === false) {
       throw new Error('Unable to load registry.');
     }
 
-    registry.current = getVisibleRegistryApps(payload.apps);
+    registry.current = apiApps.length ? apiApps : bundledApps;
   } catch {
-    registry.current = getVisibleRegistryApps([...appsJson]);
+    registry.current = bundledApps;
+  }
+
+  if (isDevelopment) {
+    const visibleApps = getVisibleRegistryApps(registry.current);
+    console.info('[TikTokMiniApp] raw apps loaded:', registry.current.length);
+    console.info('[TikTokMiniApp] after hub exclusion:', visibleApps.length);
   }
 }
 
@@ -163,7 +186,11 @@ async function boot() {
   setupAddAppModal({
     apps: registry,
     getAdminSecret: () => adminSecret,
-    onSave: refresh
+    onSave: async (nextApps) => {
+      refresh(nextApps);
+      await loadRegistry();
+      refresh();
+    }
   });
   refresh();
 }

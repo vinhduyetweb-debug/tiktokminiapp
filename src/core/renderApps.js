@@ -1,5 +1,6 @@
-const SELF_APP_IDS = new Set(['tiktokminiapp', 'tiktok-mini-app']);
+const SELF_APP_IDS = new Set(['tiktokminiapp', 'tiktok-miniapp']);
 const SELF_LIVE_URL = 'https://tiktokminiapp.vercel.app';
+const SELF_NAME = 'TikTokMiniApp';
 
 function normalizeUrl(url) {
   return String(url || '').trim().replace(/\/+$/, '').toLowerCase();
@@ -10,15 +11,30 @@ function openExternal(url) {
 }
 
 function isSelfApp(app) {
-  return SELF_APP_IDS.has(String(app.id || '').toLowerCase()) || normalizeUrl(app.liveUrl) === SELF_LIVE_URL;
+  const id = String(app.id || '').trim().toLowerCase();
+  const name = String(app.name || '').trim();
+  const githubUrl = normalizeUrl(app.githubUrl);
+
+  return (
+    SELF_APP_IDS.has(id) ||
+    name === SELF_NAME ||
+    githubUrl.includes('/tiktokminiapp') ||
+    normalizeUrl(app.liveUrl) === SELF_LIVE_URL
+  );
+}
+
+function isValidApp(app) {
+  return Boolean(app && typeof app === 'object' && app.id && app.name);
 }
 
 export function getVisibleRegistryApps(apps) {
   const seenLiveUrls = new Set();
   const result = [];
 
-  apps.forEach((app) => {
-    if (!app || isSelfApp(app)) {
+  const sourceApps = Array.isArray(apps) ? apps : [];
+
+  sourceApps.forEach((app) => {
+    if (!isValidApp(app) || isSelfApp(app)) {
       return;
     }
 
@@ -43,8 +59,8 @@ function getCategories(apps) {
 }
 
 function matchesFilters(app, filters) {
-  const term = filters.search.trim().toLowerCase();
-  const category = filters.category;
+  const term = String(filters.search || '').trim().toLowerCase();
+  const category = filters.category || '';
   const searchableText = `${app.name} ${app.description}`.toLowerCase();
 
   return (!term || searchableText.includes(term)) && (!category || app.category === category);
@@ -149,9 +165,13 @@ export function renderCategoryFilter(selectElement, apps, selectedCategory) {
   selectElement.value = currentValue;
 }
 
-export function renderApps({ apps, feedElement, countElement, filters, isAdmin, onDelete }) {
+export function renderApps({ apps, feedElement, countElement, filters, isAdmin, onDelete, debug = false }) {
   const registryApps = getVisibleRegistryApps(apps);
   const visibleApps = registryApps.filter((app) => matchesFilters(app, filters));
+
+  if (debug) {
+    console.info('[TikTokMiniApp] apps after search/category filter:', visibleApps.length);
+  }
 
   if (countElement) {
     countElement.textContent = String(visibleApps.length);
@@ -164,7 +184,9 @@ export function renderApps({ apps, feedElement, countElement, filters, isAdmin, 
   if (!visibleApps.length) {
     const empty = document.createElement('div');
     empty.className = 'empty-state';
-    empty.textContent = 'No apps match the current search or filter.';
+    empty.textContent = registryApps.length
+      ? 'No apps match the current search or filter.'
+      : 'No apps found. Check src/data/apps.json.';
     feedElement.replaceChildren(empty);
     return registryApps;
   }

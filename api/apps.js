@@ -151,7 +151,8 @@ async function loadGitHubRegistry() {
   }
 
   const file = await response.json();
-  const apps = JSON.parse(decodeBase64(file.content));
+  const parsed = JSON.parse(decodeBase64(file.content));
+  const apps = normalizeRegistry(parsed);
 
   return {
     apps: Array.isArray(apps) ? apps : [],
@@ -162,8 +163,19 @@ async function loadGitHubRegistry() {
 async function loadStaticRegistry() {
   const filePath = path.join(process.cwd(), 'src', 'data', 'apps.json');
   const file = await fs.readFile(filePath, 'utf8');
-  const apps = JSON.parse(file);
-  return Array.isArray(apps) ? apps : [];
+  return normalizeRegistry(JSON.parse(file));
+}
+
+function normalizeRegistry(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (Array.isArray(value?.apps)) {
+    return value.apps;
+  }
+
+  return [];
 }
 
 async function saveGitHubRegistry({ apps, sha, message }) {
