@@ -8,6 +8,7 @@ import {
 } from './core/renderApps.js';
 
 const canAttemptAdminLogin = new URLSearchParams(window.location.search).get('admin') === '1';
+const isDebugMode = new URLSearchParams(window.location.search).get('debug') === '1';
 const isDevelopment = import.meta.env.DEV;
 
 let adminSecret = '';
@@ -39,6 +40,9 @@ function refresh(nextApps = registry.current) {
   registry.current = normalizeApps(nextApps);
 
   const elements = getElements();
+  const visibleApps = getVisibleRegistryApps(registry.current);
+  renderDiagnostics(elements, visibleApps.length);
+
   const apps = renderApps({
     apps: registry.current,
     feedElement: elements.feed,
@@ -50,6 +54,46 @@ function refresh(nextApps = registry.current) {
   });
 
   renderCategoryFilter(elements.category, apps, state.category);
+}
+
+function renderDiagnostics(elements, visibleCount) {
+  if (!isDebugMode) {
+    return;
+  }
+
+  let panel = document.getElementById('appDebugPanel');
+
+  if (!panel) {
+    panel = document.createElement('section');
+    panel.id = 'appDebugPanel';
+    panel.setAttribute('aria-label', 'App rendering diagnostics');
+    panel.style.cssText = [
+      'margin:16px 20px',
+      'padding:16px',
+      'border:1px solid #facc15',
+      'border-radius:8px',
+      'background:#422006',
+      'color:#fef3c7',
+      'font:14px/1.5 Arial,sans-serif',
+      'white-space:pre-wrap'
+    ].join(';');
+
+    document.querySelector('main')?.prepend(panel);
+  }
+
+  const diagnostics = {
+    'imported apps count': normalizeApps(apps).length,
+    'registry.current count': registry.current.length,
+    'visible registry count': visibleCount,
+    'current search value': state.search || '',
+    'current category value': state.category || '',
+    'appFeed exists': Boolean(elements.feed),
+    'appCount exists': Boolean(elements.count)
+  };
+
+  panel.textContent = Object.entries(diagnostics)
+    .map(([label, value]) => `${label}: ${value}`)
+    .join('\n');
 }
 
 function normalizeApps(value) {
