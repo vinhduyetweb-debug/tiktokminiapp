@@ -3,53 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>MINI APP PLATFORM</title>
-<link rel="stylesheet" href="style.css">
-<script defer src="app.js"></script>
+<meta name="theme-color" content="#020617">
+<meta name="description" content="TikTokMiniApp is a portfolio-style mini app gallery powered by apps.json, with live Vercel apps and GitHub repositories.">
+<meta property="og:title" content="TikTokMiniApp - Portfolio Mini App Hub">
+<meta property="og:description" content="Browse Vinh's live Vercel mini apps, view GitHub repositories, and manage the app registry from GitHub.">
+<meta property="og:type" content="website">
+<title>TikTokMiniApp - Portfolio Mini App Hub</title>
+<script type="module" src="/src/main.js"></script>
 </head>
 <body>
 
 <header class="topbar">
 <div>
-<h1>🎮 MINI APP PLATFORM</h1>
-<p>Interactive Mobile Mini App Ecosystem</p>
+<p class="eyebrow">Portfolio Hub</p>
+<h1>TikTokMiniApp Gallery</h1>
+<p>Live Vercel mini apps and GitHub source links from one mobile-friendly hub.</p>
 </div>
 
-<div class="top-buttons">
-<button id="rewardBtn">🎁 Reward</button>
-<a href="/admin/index.html">⚙ Admin</a>
+<div class="admin-actions">
+<span id="adminNote" class="admin-note hidden">Admin verified. Updates are saved through the secure API.</span>
+<button id="adminLoginBtn" class="secondary-action hidden" type="button">Admin Login</button>
+<button id="addAppBtn" class="add-app-btn hidden" type="button">➕ Add App</button>
 </div>
 </header>
 
-<section class="hero">
-<h2>🔥 Explore Trending Mini Apps</h2>
-<p>Swipe • Play • Learn • Explore</p>
-</section>
-
-<section class="stats">
-<div class="stat">
-<span>🪙 Coins</span>
-<strong id="coins">0</strong>
+<main>
+<section class="hero" aria-labelledby="heroTitle">
+<div>
+<h2 id="heroTitle">Mini app portfolio</h2>
+<p>Every card is rendered from <code>src/data/apps.json</code>. TikTokMiniApp itself is intentionally excluded from the gallery.</p>
 </div>
-
-<div class="stat">
-<span>🔥 Apps</span>
+<div class="app-count">
+<span>Apps shown</span>
 <strong id="appCount">0</strong>
 </div>
-
-<div class="stat">
-<span>🏆 XP</span>
-<strong id="xp">0</strong>
-</div>
 </section>
 
-<main id="appFeed"></main>
+<section class="toolbar" aria-label="Search and filter apps">
+<label>
+<span>Search</span>
+<input id="searchInput" type="search" placeholder="Search by name or description">
+</label>
 
-<div id="rewardModal" class="modal hidden">
+<label>
+<span>Category</span>
+<select id="categoryFilter">
+<option value="">All categories</option>
+</select>
+</label>
+
+<button id="clearFiltersBtn" class="secondary-action" type="button">Clear</button>
+</section>
+
+<section id="appFeed" class="app-grid" aria-label="Mini app list"></section>
+</main>
+
+<div id="addAppModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="addAppTitle">
 <div class="modal-box">
-<h2>🎉 Daily Reward</h2>
-<p>You earned +20 coins!</p>
-<button onclick="closeReward()">Awesome</button>
+<div class="modal-header">
+<h2 id="addAppTitle">Add App to apps.json</h2>
+<button id="closeAddAppBtn" class="icon-btn" type="button" aria-label="Close add app form">×</button>
+</div>
+
+<form id="addAppForm" class="add-app-form">
+<label>
+<span>App name *</span>
+<input name="name" type="text" autocomplete="off" required>
+</label>
+
+<label>
+<span>Vercel live URL *</span>
+<input name="liveUrl" type="url" placeholder="https://your-app.vercel.app/" required>
+</label>
+
+<label>
+<span>GitHub URL</span>
+<input name="githubUrl" type="url" placeholder="https://github.com/user/repo">
+</label>
+
+<label>
+<span>Description</span>
+<textarea name="description" rows="3" placeholder="Short portfolio description"></textarea>
+</label>
+
+<div class="form-row">
+<label>
+<span>Category</span>
+<input name="category" type="text" placeholder="education">
+</label>
+
+<label>
+<span>Icon</span>
+<input name="icon" type="text" maxlength="4" placeholder="📱">
+</label>
+</div>
+
+<p id="addAppError" class="form-error" role="alert"></p>
+<p id="addAppStatus" class="form-status" role="status" aria-live="polite"></p>
+
+<div class="form-actions">
+<button id="cancelAddAppBtn" class="secondary-action" type="button">Cancel</button>
+<button class="primary-action" type="submit">Save App</button>
+</div>
+</form>
 </div>
 </div>
 
